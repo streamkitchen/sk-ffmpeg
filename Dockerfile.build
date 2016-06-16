@@ -1,0 +1,12 @@
+FROM ubuntu:xenial
+
+RUN apt-get update
+RUN apt-get -y --force-yes install autoconf automake build-essential libass-dev \
+  libfreetype6-dev libtheora-dev libtool libvorbis-dev pkg-config texinfo zlib1g-dev sudo \
+  wget cmake git mercurial nasm libgnutls-dev libsodium-dev
+
+ADD build/shared-dependencies.sh /build/shared-dependencies.sh
+RUN /build/shared-dependencies.sh
+
+ADD build/build-ffmpeg.sh /build/build-ffmpeg.sh
+RUN /build/build-ffmpeg.sh
